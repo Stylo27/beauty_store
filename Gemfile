@@ -26,6 +26,8 @@ gem 'puma', '~> 3.11'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'active_model_serializers', '~> 0.10.0'
+gem 'rswag-api'
+gem 'rswag-ui'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
@@ -37,6 +39,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.8'
   gem 'factory_bot_rails'
   gem 'database_cleaner'
+  gem 'rswag-specs'
 end
 
 group :development do
