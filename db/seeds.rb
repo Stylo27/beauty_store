@@ -5,17 +5,15 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-if Rails.env != 'production'
-  categories = %w( Salad Soup Entrees Chicken )
-  40.times do
-    Product.create(
-      name: Faker::Food.dish,
-      sold_out: Faker::Boolean.boolean,
-      category: categories[Random.rand(0..3)],
-      under_sale: Faker::Boolean.boolean,
-      price: Faker::Number.between(1, 10000),
-      sale_price: Faker::Number.between(10, 3000),
-      sale_text: "#{Faker::Number.between(1, 50)}\% OFF"
-    )
-  end
+categories = %w( Salad Soup Entrees Chicken )
+40.times do
+  Product.create(
+    name: Faker::Food.dish,
+    sold_out: Faker::Boolean.boolean,
+    category: categories[Random.rand(0..3)],
+    under_sale: Faker::Boolean.boolean,
+    price: Faker::Number.between(1, 10000),
+    sale_price: Faker::Number.between(10, 3000),
+    sale_text: "#{Faker::Number.between(1, 50)}\% OFF"
+  )
 end
