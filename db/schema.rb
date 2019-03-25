@@ -10,16 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_25_105709) do
+ActiveRecord::Schema.define(version: 2019_03_25_114227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "products", force: :cascade do |t|
     t.string "name"
-    t.boolean "sold_out"
+    t.boolean "sold_out", default: false, null: false
     t.string "category"
-    t.boolean "under_sale"
+    t.boolean "under_sale", default: false, null: false
     t.integer "price"
     t.integer "sale_price"
     t.string "sale_text"
