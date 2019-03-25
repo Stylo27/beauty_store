@@ -34,6 +34,9 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
   gem 'pry', '~> 0.12.2'
+  gem 'rspec-rails', '~> 3.8'
+  gem 'factory_bot_rails'
+  gem 'database_cleaner'
 end
 
 group :development do
