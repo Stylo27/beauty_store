@@ -42,6 +42,21 @@
             "name": "available",
             "in": "query",
             "type": "boolean"
+          },
+          {
+            "name": "order_by_name",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "order_by_category",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "order_by_price",
+            "in": "query",
+            "type": "string"
           }
         ],
         "responses": {

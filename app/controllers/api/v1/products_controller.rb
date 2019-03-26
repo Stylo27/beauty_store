@@ -1,6 +1,6 @@
 class Api::V1::ProductsController < Api::BaseController
   def index
-    @products = ProductsFinder.new(Product.all).call(query_params)
+    @products = ProductsFinderQuery.new(Product.all).call(query_params)
     render json: @products
   end
 
@@ -15,7 +15,10 @@ class Api::V1::ProductsController < Api::BaseController
       :price_from,
       :price_to,
       :under_sale,
-      :available
+      :available,
+      :order_by_name,
+      :order_by_category,
+      :order_by_price
     )
   end
 end

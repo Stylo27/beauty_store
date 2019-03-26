@@ -13,17 +13,26 @@ describe 'Products API' do
                   type: :string
                 }
       parameter name: :price_from,
-                in: :query,
+                in:   :query,
                 type: :string
       parameter name: :price_to,
-                in: :query,
+                in:   :query,
                 type: :string
       parameter name: :under_sale,
-                in: :query,
+                in:   :query,
                 type: :boolean
       parameter name: :available,
-                in: :query,
+                in:   :query,
                 type: :boolean
+      parameter name: :order_by_name,
+                in:   :query,
+                type: :string
+      parameter name: :order_by_category,
+                in:   :query,
+                type: :string
+      parameter name: :order_by_price,
+                in:   :query,
+                type: :string
       response '200', 'ok' do
         schema type: :object,
         properties: {
