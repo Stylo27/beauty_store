@@ -12,8 +12,8 @@ categories = %w( Salad Soup Entrees Chicken )
     sold_out: Faker::Boolean.boolean,
     category: categories[Random.rand(0..3)],
     under_sale: Faker::Boolean.boolean,
-    price: Faker::Number.between(1, 10000),
-    sale_price: Faker::Number.between(10, 3000),
+    price: Faker::Number.between(1000, 1000000),
+    sale_price: Faker::Number.between(1000, 999999),
     sale_text: "#{Faker::Number.between(1, 50)}\% OFF"
   )
 end

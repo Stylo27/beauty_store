@@ -14,6 +14,51 @@
         "consumes": [
           "application/json"
         ],
+        "parameters": [
+          {
+            "name": "categories",
+            "in": "query",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "price_from",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "price_to",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "under_sale",
+            "in": "query",
+            "type": "boolean"
+          },
+          {
+            "name": "available",
+            "in": "query",
+            "type": "boolean"
+          },
+          {
+            "name": "order_by_name",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "order_by_category",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "order_by_price",
+            "in": "query",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "ok",
@@ -52,13 +97,12 @@
     },
     "/api/v1/products/{id}": {
       "get": {
-        "summary": "Retrieves a blog",
+        "summary": "Retrieves a product",
         "tags": [
           "Products"
         ],
         "produces": [
-          "application/json",
-          "application/xml"
+          "application/json"
         ],
         "parameters": [
           {
@@ -98,12 +142,7 @@
                 "sale_text": {
                   "type": "string"
                 }
-              },
-              "required": [
-                "id",
-                "name",
-                "category"
-              ]
+              }
             }
           },
           "404": {
