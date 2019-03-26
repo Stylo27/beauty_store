@@ -6,7 +6,24 @@ describe 'Products API' do
     get 'Get products list' do
       tags 'Products'
       consumes 'application/json'
-
+      parameter name: :categories,
+                in: :query,
+                type: :array,
+                items: {
+                  type: :string
+                }
+      parameter name: :price_from,
+                in: :query,
+                type: :string
+      parameter name: :price_to,
+                in: :query,
+                type: :string
+      parameter name: :under_sale,
+                in: :query,
+                type: :boolean
+      parameter name: :available,
+                in: :query,
+                type: :boolean
       response '200', 'ok' do
         schema type: :object,
         properties: {
@@ -26,9 +43,9 @@ describe 'Products API' do
 
   path '/api/v1/products/{id}' do
 
-    get 'Retrieves a blog' do
+    get 'Retrieves a product' do
       tags 'Products'
-      produces 'application/json', 'application/xml'
+      produces 'application/json'
       parameter name: :id, :in => :path, :type => :string
 
       response '200', 'blog found' do
@@ -42,8 +59,7 @@ describe 'Products API' do
             price:      { type: :integer },
             sale_price: { type: :integer },
             sale_text:  { type: :string }
-          },
-          required: [ 'id', 'name', 'category' ]
+          }
 
         let(:id) { create(:product).id }
         run_test!
