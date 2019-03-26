@@ -6,39 +6,41 @@ describe 'Products API' do
     get 'Get products list' do
       tags 'Products'
       consumes 'application/json'
-      parameter name: :categories,
+      parameter name: 'filter[categories]',
                 in: :query,
                 type: :array,
                 items: {
                   type: :string
-                }
-      parameter name: :price_from,
+                },
+                explode: true
+      parameter name: 'filter[price_from]',
                 in:   :query,
                 type: :integer
-      parameter name: :price_to,
+      parameter name: 'filter[price_to]',
                 in:   :query,
                 type: :integer
-      parameter name: :under_sale,
+      parameter name: 'filter[under_sale]',
                 in:   :query,
                 type: :boolean
-      parameter name: :available,
+      parameter name: 'filter[available]',
                 in:   :query,
                 type: :boolean
-      parameter name: :order_by_name,
+      parameter name: 'sort[order_by_name]',
                 in:   :query,
                 type: :string
-      parameter name: :order_by_category,
+      parameter name: 'sort[order_by_category]',
                 in:   :query,
                 type: :string
-      parameter name: :order_by_price,
+      parameter name: 'sort[order_by_price]',
                 in:   :query,
                 type: :string
-      parameter name: :page,
+      parameter name: 'page',
                 in:   :query,
                 type: :integer
-      parameter name: :per_page,
+      parameter name: 'per_page',
                 in:   :query,
                 type: :integer
+
       response '200', 'ok' do
         schema type: :object,
         properties: {

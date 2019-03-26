@@ -2,20 +2,20 @@ class ProductsFilterQuery < ProductsFinderQuery
   def call(query_params)
     filtred_products = scope_category(
       products,
-      query_params[:categories]&.split(',')
+      query_params[:filter][:categories]&.split(',')
     )
     filtred_products = scope_price(
       filtred_products,
-      query_params[:price_from],
-      query_params[:price_to]
+      query_params[:filter][:price_from],
+      query_params[:filter][:price_to]
     )
     filtred_products = scope_sale(
       filtred_products,
-      query_params[:under_sale]
+      query_params[:filter][:under_sale]
     )
     filtred_products = scope_available(
       filtred_products,
-      query_params[:available]
+      query_params[:filter][:available]
     )
     filtred_products
   end

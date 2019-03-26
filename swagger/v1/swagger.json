@@ -16,45 +16,46 @@
         ],
         "parameters": [
           {
-            "name": "categories",
+            "name": "filter[categories]",
             "in": "query",
             "type": "array",
             "items": {
               "type": "string"
-            }
+            },
+            "explode": true
           },
           {
-            "name": "price_from",
+            "name": "filter[price_from]",
             "in": "query",
             "type": "integer"
           },
           {
-            "name": "price_to",
+            "name": "filter[price_to]",
             "in": "query",
             "type": "integer"
           },
           {
-            "name": "under_sale",
+            "name": "filter[under_sale]",
             "in": "query",
             "type": "boolean"
           },
           {
-            "name": "available",
+            "name": "filter[available]",
             "in": "query",
             "type": "boolean"
           },
           {
-            "name": "order_by_name",
+            "name": "sort[order_by_name]",
             "in": "query",
             "type": "string"
           },
           {
-            "name": "order_by_category",
+            "name": "sort[order_by_category]",
             "in": "query",
             "type": "string"
           },
           {
-            "name": "order_by_price",
+            "name": "sort[order_by_price]",
             "in": "query",
             "type": "string"
           },

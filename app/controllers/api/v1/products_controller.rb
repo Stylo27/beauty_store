@@ -12,14 +12,18 @@ class Api::V1::ProductsController < Api::BaseController
 
   def query_params
     params.permit(
-      :categories,
-      :price_from,
-      :price_to,
-      :under_sale,
-      :available,
-      :order_by_name,
-      :order_by_category,
-      :order_by_price
+      filter: [
+        :categories,
+        :price_from,
+        :price_to,
+        :under_sale,
+        :available
+      ],
+      sort: [
+        :order_by_name,
+        :order_by_category,
+        :order_by_price
+      ]
     )
   end
 end
