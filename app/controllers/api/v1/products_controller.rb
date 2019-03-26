@@ -1,6 +1,7 @@
 class Api::V1::ProductsController < Api::BaseController
   def index
     @products = ProductsFinderQuery.new(Product.all).call(query_params)
+      .paginate(page: params[:page], per_page: params[:per_page])
     render json: @products
   end
 

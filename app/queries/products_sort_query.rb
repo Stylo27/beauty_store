@@ -2,14 +2,14 @@ class ProductsSortQuery < ProductsFinderQuery
   def call(query_params)
     sorted_products = sort_by_name(products, query_params[:order_by_name])
     sorted_products = sort_by_category(
-                                        sorted_products,
-                                        query_params[:order_by_category]
-                                      )
+      sorted_products,
+      query_params[:order_by_category]
+    )
     sorted_products = sort_by_price(
-                                      sorted_products,
-                                      query_params[:order_by_price],
-                                      query_params[:under_sale]
-                                    )
+      sorted_products,
+      query_params[:order_by_price],
+      query_params[:under_sale]
+    )
   end
 
   private

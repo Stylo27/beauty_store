@@ -26,12 +26,12 @@
           {
             "name": "price_from",
             "in": "query",
-            "type": "string"
+            "type": "integer"
           },
           {
             "name": "price_to",
             "in": "query",
-            "type": "string"
+            "type": "integer"
           },
           {
             "name": "under_sale",
@@ -57,6 +57,16 @@
             "name": "order_by_price",
             "in": "query",
             "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "type": "integer"
           }
         ],
         "responses": {
