@@ -16,7 +16,7 @@ class ProductsFinderQuery
       else
         products
       end
-      scoped
+    scoped
   end
 
   private

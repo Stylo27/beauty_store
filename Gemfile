@@ -30,6 +30,8 @@ gem 'rswag-api'
 gem 'rswag-ui'
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 gem 'will_paginate', '~> 3.1.0'
+gem 'webpacker', '~> 4.x'
+gem 'foreman'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
