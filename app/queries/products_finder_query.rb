@@ -1,25 +1,29 @@
-class ProductsFinderQuery
-  def initialize(products)
-    @products = products
-  end
-
-  def call(query_params)
-    scoped =
-      if query_params[:filter]
-        ProductsFilterQuery.new(products).call(query_params)
-       else
-        products
-      end
-    scoped =
-      if query_params[:sort]
-        ProductsSortQuery.new(scoped).call(query_params)
-      else
-        products
-      end
-    scoped
+class ProductsFinderQuery < BaseService
+  def call
+    found_products = filter_params ? filter_products(products) : products
+    found_products = sort_params ? sort_products(found_products) : found_products
+    found_products
   end
 
   private
 
-  attr_accessor :products
+  def filter_products(products)
+    ProductsFilterQuery.call(products, filter_params)
+  end
+
+  def sort_products(products)
+    ProductsSortQuery.call(products, sort_params, sort_by_sale: sort_by_sale?)
+  end
+
+  def filter_params
+    @filter_params ||= query_params[:filter]
+  end
+
+  def sort_params
+    @sort_params ||= query_params[:sort]
+  end
+
+  def sort_by_sale?
+    query_params.dig(:filter, :under_sale) == 'true'
+  end
 end

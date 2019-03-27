@@ -1,23 +1,33 @@
-class ProductsSortQuery < ProductsFinderQuery
-  def call(query_params)
-    sorted_products = sort_by_name(
+class ProductsSortQuery < BaseService
+  def self.call(products, query_params, sort_by_sale: false)
+    new(products, query_params, sort_by_sale).call
+  end
+
+  def initialize(products, query_params, sort_by_sale)
+    super(products, query_params)
+    @sort_by_sale = sort_by_sale
+  end
+
+  def call
+    scoped_products = sort_by_name(
       products,
-      query_params[:sort][:order_by_name]
+      query_params[:order_by_name]
     )
-    sorted_products = sort_by_category(
-      sorted_products,
-      query_params[:sort][:order_by_category]
+    scoped_products = sort_by_category(
+      scoped_products,
+      query_params[:order_by_category]
     )
-    sorted_products = sort_by_price(
-      sorted_products,
-      query_params[:sort][:order_by_price],
-      query_params[:filter]&[:under_sale]
+    scoped_products = sort_by_price(
+      scoped_products,
+      query_params[:order_by_price],
+      sort_by_sale
     )
+    scoped_products
   end
 
   private
 
-  attr_accessor :products
+  attr_reader :sort_by_sale
 
   def sort_by_name(products, order_by_name = nil)
     order_by_name ? products.order(name: order_by_name) : products

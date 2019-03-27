@@ -1,40 +1,38 @@
-class ProductsFilterQuery < ProductsFinderQuery
-  def call(query_params)
-    filtred_products = scope_category(
+class ProductsFilterQuery < BaseService
+  def call
+    scoped_products = scope_category(
       products,
-      query_params[:filter][:categories]&.split(',')
+      query_params[:categories]&.split(',')
     )
-    filtred_products = scope_price(
-      filtred_products,
-      query_params[:filter][:price_from],
-      query_params[:filter][:price_to]
+    scoped_products = scope_price(
+      scoped_products,
+      query_params[:price_from],
+      query_params[:price_to]
     )
-    filtred_products = scope_sale(
-      filtred_products,
-      query_params[:filter][:under_sale]
+    scoped_products = scope_sale(
+      scoped_products,
+      query_params[:under_sale]
     )
-    filtred_products = scope_available(
-      filtred_products,
-      query_params[:filter][:available]
+    scoped_products = scope_available(
+      scoped_products,
+      query_params[:available]
     )
-    filtred_products
+    scoped_products
   end
 
   private
 
-  attr_accessor :products
-
   def scope_category(products, categories = nil)
-    categories ? products.where('category ILIKE ANY ( array[?] )', categories) : products
+    categories ? products.by_categories(categories) : products
   end
 
   def scope_price(products, price_from = nil, price_to = nil)
     if price_from && price_to
-      products.where('price BETWEEN ? AND ?', price_from, price_to)
+      products.price_range(price_from, price_to)
     elsif price_from
-      products.where('price >= ?', price_from)
+      products.from_price(price_from)
     elsif price_to
-      products.where('price <= ?', price_to)
+      products.to_price(price_to)
     else
       products
     end
