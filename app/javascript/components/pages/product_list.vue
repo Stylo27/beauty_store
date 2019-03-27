@@ -1,14 +1,18 @@
 <template>
-  <div>
-    <b-card v-for="(product, index) in products"
-      :title="product.name"
-      :img-src="url + index"
-      img-alt="Image"
-      :sub-title="product.category"
-      style="max-width: 20rem;"
-      class="mb-2"
-    >
-  </b-card>
+  <div class="col-md-9">
+    <div class="row">
+      <div class="col-md-3" v-for="(product, index) in products">
+        <b-card
+          :title="product.name"
+          :img-src="url + index"
+          img-alt="Image"
+          :sub-title="product.category"
+          style="max-width: 20rem;"
+          class="mt-3"
+        >
+        </b-card>
+      </div>
+    </div>
   </div>
 </template>
 <script>
