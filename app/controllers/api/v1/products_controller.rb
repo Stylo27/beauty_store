@@ -1,7 +1,10 @@
 class Api::V1::ProductsController < Api::BaseController
   def index
-    @products = ProductsFinderQuery.new(Product.all).call(query_params)
-      .paginate(page: params[:page], per_page: params[:per_page])
+    cached_key = "#{params[:filter]}/#{params[:sort]}#{Product.maximum(:updated_at)}"
+    @products = Rails.cache.fetch("#{cached_key}", expires_at: 1.hour) do
+      ProductsFinderQuery.new(Product.all).call(query_params)
+        .paginate(page: params[:page], per_page: params[:per_page])
+    end
     render json: @products
   end
 
