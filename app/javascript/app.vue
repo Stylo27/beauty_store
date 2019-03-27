@@ -1,22 +1,14 @@
 <template>
   <div>
-    <p>{{ message }}</p>
+    <Header></Header>
   </div>
 </template>
 
 <script>
+import Header from './components/layouts/header.vue';
 export default {
-  data: function () {
-    return {
-      message: "Hello Vue!"
-    }
+  components: {
+    Header
   }
 }
 </script>
-
-<style scoped>
-p {
-  font-size: 2em;
-  text-align: center;
-}
-</style>
