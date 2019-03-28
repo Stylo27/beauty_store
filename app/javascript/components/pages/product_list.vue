@@ -16,6 +16,7 @@
   </div>
 </template>
 <script>
+  import axios from 'axios'
   export default {
     data() {
       return {
@@ -24,18 +25,15 @@
       }
     },
     created() {
-      fetch('http://localhost:3000/api/v1/products')
-        .then((response) => {
-          if(response.ok) {
-            return response.json()
-          }
-        })
-        .then((data) => {
-          var products_data = data['data']
+      axios
+        .get('http://localhost:3000/api/v1/products')
+        .then(response => {
+          var products_data = response.data['data']
           for (var i = products_data.length - 1; i >= 0; i--) {
             this.products.push(products_data[i]['attributes'])
           }
         })
+        .catch(error => console.log(error));
     }
   }
 </script>
