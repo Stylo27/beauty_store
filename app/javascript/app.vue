@@ -1,22 +1,21 @@
 <template>
-  <div id="app">
-    <p>{{ message }}</p>
+  <div>
+    <Header></Header>
+    <div class="row">
+      <Sidebar></Sidebar>
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
-export default {
-  data: function () {
-    return {
-      message: "Hello Vue!"
+  import Header from './components/layouts/header.vue'
+
+  import Sidebar from './components/layouts/sidebar.vue'
+  export default {
+    components: {
+      Header,
+      Sidebar
     }
   }
-}
 </script>
-
-<style scoped>
-p {
-  font-size: 2em;
-  text-align: center;
-}
-</style>

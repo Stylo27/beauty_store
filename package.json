@@ -1,8 +1,11 @@
 {
   "dependencies": {
     "@rails/webpacker": "^4.0.2",
+    "bootstrap": "^4.3.1",
+    "bootstrap-vue": "^2.0.0-rc.15",
     "vue": "^2.6.10",
     "vue-loader": "^15.7.0",
+    "vue-router": "^3.0.2",
     "vue-template-compiler": "^2.6.10"
   },
   "devDependencies": {
