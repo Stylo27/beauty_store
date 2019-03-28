@@ -1,39 +1,22 @@
 <template>
-  <div class="col-md-9">
+  <div class="col-md-8">
     <div class="row">
-      <div class="col-md-3" v-for="(product, index) in products">
-        <b-card
-          :title="product.name"
-          :img-src="url + index"
-          img-alt="Image"
-          :sub-title="product.category"
-          style="max-width: 20rem;"
-          class="mt-3"
-        >
-        </b-card>
+      <div class="col-md-3" v-for="product in products" :key="product.id">
+        <Product :product="product" />
       </div>
     </div>
   </div>
 </template>
 <script>
-  import axios from 'axios'
+  import { mapState } from 'vuex';
+  import Product from './product.vue'
   export default {
-    data() {
-      return {
-        products: [],
-        url: "https://picsum.photos/200/200/?image=",
-      }
-    },
+    computed: mapState({
+      products: state => state.products.all
+    }),
     created() {
-      axios
-        .get('http://localhost:3000/api/v1/products')
-        .then(response => {
-          var products_data = response.data['data']
-          for (var i = products_data.length - 1; i >= 0; i--) {
-            this.products.push(products_data[i]['attributes'])
-          }
-        })
-        .catch(error => console.log(error));
-    }
+      this.$store.dispatch('getProducts')
+    },
+    components: { Product }
   }
 </script>
