@@ -1,39 +1,58 @@
 import HTTP from '../../packs/http-interface.js';
-import axios from 'axios'
+
 const state = {
   all: [],
+  currentPage: 1,
+  perPage: 30,
   links: null,
+  total_count: null,
   errors: []
+};
+
+const getters = {
+  currentPage: state => state.currentPage
 };
 
 const mutations = {
   pushProducts (state, payload) {
-    state.all.push(payload)
+    state.all = payload
   },
-  pushLinks (state, payload) {
+  setLinks (state, payload) {
     state.links = payload
+  },
+  setTotalCount (state, payload) {
+    state.total_count = payload
   },
   pushErrors (state, payload) {
     state.errors.push(payload)
+  },
+  setCurrentPage (state, payload) {
+    state.currentPage = payload
   }
-}
+};
+
 const actions = {
-  getProducts ({ commit }) {
+  getProducts ({ commit }, payload) {
     HTTP
-      .get()
-      .then(response => {
-        console.log(response.data['links'])
-        for (var i = response.data['data'].length - 1; i >= 0; i--) {
-          commit('pushProducts', response.data['data'][i]['attributes'])
+      .get('', {
+        params: {
+          per_page: state.perPage,
+          page: payload !== undefined ? payload.page : state.currentPage
         }
-        commit('pushLinks', response.data['links'])
+      })
+      .then(response => {
+        for (var i = response.data['data'].length - 1; i >= 0; i--) {
+          commit('pushProducts', response.data['data'])
+        }
+        commit('setLinks', response.data['links'])
+        commit('setTotalCount', response.data['meta']['total-count'])
       })
     .catch(error => commit('pushErrors', error))
   }
 };
-
 export default {
   state,
   mutations,
+  getters,
   actions
 }
