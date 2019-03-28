@@ -16,24 +16,18 @@
   </div>
 </template>
 <script>
-  import axios from 'axios'
+  import { mapState } from 'vuex';
   export default {
+    computed: mapState({
+      products: state => state.products.all
+    }),
     data() {
       return {
-        products: [],
-        url: "https://picsum.photos/200/200/?image=",
+        url: 'https://picsum.photos/200/200?image='
       }
     },
     created() {
-      axios
-        .get('http://localhost:3000/api/v1/products')
-        .then(response => {
-          var products_data = response.data['data']
-          for (var i = products_data.length - 1; i >= 0; i--) {
-            this.products.push(products_data[i]['attributes'])
-          }
-        })
-        .catch(error => console.log(error));
+      this.$store.dispatch('getProducts')
     }
   }
 </script>
