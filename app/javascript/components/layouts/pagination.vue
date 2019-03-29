@@ -25,7 +25,9 @@
 
         set: function (currentPage) {
           this.$store.dispatch('getProducts', {
-            page: currentPage
+            page: currentPage,
+            sort: this.$route.query.sort,
+            filter: this.$route.query.filter
           })
         }
       }

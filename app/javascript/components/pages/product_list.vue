@@ -7,20 +7,24 @@
         </router-link>
       </div>
     </div>
-    <Pagination></Pagination>
+    <Pagination />
   </div>
 </template>
 <script>
   import { mapState } from 'vuex';
+
   import Product from '../layouts/product.vue'
   import Pagination from '../layouts/pagination'
+
   export default {
-    computed: mapState({
-      products: state => state.products.all
-    }),
     created() {
       this.$store.dispatch('getProducts', this.$route.query)
     },
+
+    computed: mapState({
+      products: state => state.products.all
+    }),
+
     components: { Product, Pagination }
   }
 </script>

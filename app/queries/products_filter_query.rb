@@ -27,11 +27,11 @@ class ProductsFilterQuery < BaseService
   end
 
   def scope_price(products, price_from = nil, price_to = nil)
-    if price_from && price_to
+    if price_from.present? && price_to.present?
       products.price_range(price_from, price_to)
-    elsif price_from
+    elsif price_from.present?
       products.from_price(price_from)
-    elsif price_to
+    elsif price_to.present?
       products.to_price(price_to)
     else
       products

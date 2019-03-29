@@ -1,8 +1,5 @@
 import HTTP from '../../../packs/http-interface.js';
 
-setParams: (params) => {
-}
-
 export default {
   getProducts ({ commit, state }, payload) {
     HTTP
@@ -10,7 +7,8 @@ export default {
         params: {
           per_page: state.perPage,
           page: payload !== undefined ? payload.page : state.currentPage,
-          sort: payload !== undefined ? payload.sort : null
+          sort: payload !== undefined ? payload.sort : null,
+          filter: payload !== undefined ? payload.filter : null
         }
       })
       .then(response => {

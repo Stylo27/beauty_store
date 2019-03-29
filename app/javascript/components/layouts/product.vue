@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-card
-      :title="product.attributes.name"
+      :title='product.attributes.name'
       :img-src="url + product.id"
       img-alt="Image"
       :sub-title="product.attributes.category"
@@ -9,15 +9,21 @@
       class="mt-3"
     >
     </b-card>
+    {{ product.attributes.price }}
+    {{ product.attributes['sold-out'] }}
   </div>
 </template>
+
 <script>
   export default {
-    props: ['product'],
     data() {
       return {
         url: 'https://picsum.photos/200/200?image='
       }
-    }
+    },
+
+    props: [
+      'product'
+    ]
   }
 </script>
