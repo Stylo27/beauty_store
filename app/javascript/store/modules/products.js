@@ -6,6 +6,7 @@ const state = {
   perPage: 30,
   links: null,
   total_count: null,
+  product: {},
   errors: []
 };
 
@@ -28,6 +29,9 @@ const mutations = {
   },
   setCurrentPage (state, payload) {
     state.currentPage = payload
+  },
+  setProduct (state, payload) {
+    state.product = payload
   }
 };
 
@@ -48,6 +52,15 @@ const actions = {
         commit('setTotalCount', response.data['meta']['total-count'])
       })
     .catch(error => commit('pushErrors', error))
+  },
+
+  getProduct ({ commit }, payload) {
+    HTTP
+      .get(`/${payload}`)
+      .then(response => {
+        commit('setProduct', response.data['data'])
+      })
+      .catch(error => commit('pushErrors', error))
   }
 };
 export default {

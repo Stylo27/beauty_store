@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-2">
+  <div>
     <b-pagination
       v-model="currentPage"
       :limit="3"
