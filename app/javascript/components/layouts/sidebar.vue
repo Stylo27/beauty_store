@@ -29,6 +29,9 @@
       <span class="ml-1">Filter:</span>
         <div>
           <b-nav-item>
+            <b-form-input placeholder="Write categories comma separated" v-model="categories"/>
+          </b-nav-item>
+          <b-nav-item>
             <b-form-input placeholder="Price from" v-model="priceFrom"/>
           </b-nav-item>
           <b-nav-item>
@@ -56,6 +59,7 @@
         priceTo: null,
         available: null,
         under_sale: null,
+        categories: null,
         sale_options: [
           { value: null, text: 'Choose Under sale' },
           { value: true, text: 'Under sale' },
@@ -83,7 +87,8 @@
               price_from: this.priceFrom,
               price_to: this.priceTo,
               available: this.available,
-              under_sale: this.under_sale
+              under_sale: this.under_sale,
+              categories: this.categories
             }
           }
         })

@@ -1,4 +1,4 @@
-class ProductsFinderQuery < BaseService
+class ProductsQueries::ProductsFinderQuery < BaseService
   def call
     found_products = filter_params ? filter_products(products) : products
     found_products = sort_params ? sort_products(found_products) : found_products
@@ -8,11 +8,11 @@ class ProductsFinderQuery < BaseService
   private
 
   def filter_products(products)
-    ProductsFilterQuery.call(products, filter_params)
+    ProductsQueries::ProductsFilterQuery.call(products, filter_params)
   end
 
   def sort_products(products)
-    ProductsSortQuery.call(products, sort_params, sort_by_sale: sort_by_sale?)
+    ProductsQueries::ProductsSortQuery.call(products, sort_params, sort_by_sale: sort_by_sale?)
   end
 
   def filter_params

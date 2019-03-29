@@ -1,4 +1,4 @@
-class ProductsSortQuery < BaseService
+class ProductsQueries::ProductsSortQuery < BaseService
   def self.call(products, query_params, sort_by_sale: false)
     new(products, query_params, sort_by_sale).call
   end
@@ -11,15 +11,15 @@ class ProductsSortQuery < BaseService
   def call
     scoped_products = sort_by_name(
       products,
-      query_params[:order_by_name]
+      validate_sort(query_params[:order_by_name])
     )
     scoped_products = sort_by_category(
       scoped_products,
-      query_params[:order_by_category]
+      validate_sort(query_params[:order_by_category])
     )
     scoped_products = sort_by_price(
       scoped_products,
-      query_params[:order_by_price],
+      validate_sort(query_params[:order_by_price]),
       sort_by_sale
     )
     scoped_products
@@ -45,5 +45,9 @@ class ProductsSortQuery < BaseService
     else
       products
     end
+  end
+
+  def validate_sort(value)
+    return 'asc' unless value != 'asc' || value != 'desc'
   end
 end

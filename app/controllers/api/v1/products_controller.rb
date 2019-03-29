@@ -1,7 +1,7 @@
 class Api::V1::ProductsController < Api::BaseController
   def index
     @products = Rails.cache.fetch(cached_key, expires_at: 1.hour) do
-      @products = ProductsFinderQuery.call(Product.all, query_params)
+      @products = ProductsQueries::ProductsFinderQuery.call(Product.all, query_params)
         .paginate(page: params[:page], per_page: 30)
     end
     render json: @products, meta: pagination_dict(@products)

@@ -4,6 +4,7 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
   before(:all) do
     @products = create_list(:product, 5)
   end
+
   describe 'GET index' do
     before do
       get :index

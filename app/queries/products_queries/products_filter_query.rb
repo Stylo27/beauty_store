@@ -1,4 +1,4 @@
-class ProductsFilterQuery < BaseService
+class ProductsQueries::ProductsFilterQuery < BaseService
   def call
     scoped_products = scope_category(
       products,
@@ -6,8 +6,8 @@ class ProductsFilterQuery < BaseService
     )
     scoped_products = scope_price(
       scoped_products,
-      query_params[:price_from],
-      query_params[:price_to]
+      validate_price(query_params[:price_from]),
+      validate_price(query_params[:price_to])
     )
     scoped_products = scope_sale(
       scoped_products,
@@ -23,7 +23,7 @@ class ProductsFilterQuery < BaseService
   private
 
   def scope_category(products, categories = nil)
-    categories ? products.by_categories(categories) : products
+    categories.present? ? products.by_categories(categories) : products
   end
 
   def scope_price(products, price_from = nil, price_to = nil)
@@ -44,5 +44,9 @@ class ProductsFilterQuery < BaseService
 
   def scope_available(products, available)
     available.present? ? products.where.not(sold_out: available) : products
+  end
+
+  def validate_price(price)
+    price.present? && price.scan(/\D/).empty? ? price : nil
   end
 end
