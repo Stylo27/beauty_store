@@ -19,7 +19,7 @@
       products: state => state.products.all
     }),
     created() {
-      this.$store.dispatch('getProducts')
+      this.$store.dispatch('getProducts', this.$route.query)
     },
     components: { Product, Pagination }
   }

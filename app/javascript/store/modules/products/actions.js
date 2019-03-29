@@ -1,12 +1,16 @@
 import HTTP from '../../../packs/http-interface.js';
 
+setParams: (params) => {
+}
+
 export default {
   getProducts ({ commit, state }, payload) {
     HTTP
       .get('', {
         params: {
           per_page: state.perPage,
-          page: payload !== undefined ? payload.page : state.currentPage
+          page: payload !== undefined ? payload.page : state.currentPage,
+          sort: payload !== undefined ? payload.sort : null
         }
       })
       .then(response => {
