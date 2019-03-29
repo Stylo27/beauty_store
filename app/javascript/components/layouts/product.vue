@@ -9,8 +9,6 @@
       class="mt-3"
     >
     </b-card>
-    {{ product.attributes.price }}
-    {{ product.attributes['sold-out'] }}
   </div>
 </template>
 

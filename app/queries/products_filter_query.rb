@@ -39,10 +39,10 @@ class ProductsFilterQuery < BaseService
   end
 
   def scope_sale(products, under_sale)
-    under_sale ? products.where(under_sale: under_sale) : products
+    under_sale.present? ? products.where(under_sale: under_sale) : products
   end
 
   def scope_available(products, available)
-    available ? products.where.not(sold_out: available) : products
+    available.present? ? products.where.not(sold_out: available) : products
   end
 end
